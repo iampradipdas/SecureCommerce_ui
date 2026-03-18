@@ -1,0 +1,48 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>SecureCommerce</h1>
+      <p>Sign in to your account</p>
+    </div>
+
+    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required #email="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && email.errors }" placeholder="Enter your email" />
+        <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+          Email is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+          #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+          placeholder="Enter your password" />
+        <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
+          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['minlength']">Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary btn-block">
+          Login
+        </button>
+      </div>
+
+      <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Logged in successfully!
+    </div>
+
+    <div class="login-footer">
+      <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="product-list-container">
+  <div class="list-header">
+    <h2>Our Products</h2>
+    <p>Browse through our collection of premium items.</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div class="product-grid" *ngIf="products.length > 0">
+    @for (product of products; track product.id) {
+      <div class="product-card">
+      <div class="product-image-placeholder">
+        <span class="no-image">No Image</span>
+      </div>
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="description">{{ product.description }}</p>
+        <div class="product-footer">
+          <span class="price">{{ product.price | currency }}</span>
+          <button class="btn btn-primary btn-sm" (click)="addToCart(product)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="no-products" *ngIf="products.length === 0 && !errorMessage">
+    <p>No products found.</p>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="orders-container">
+  <div class="orders-header">
+    <h2>Your Orders</h2>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="orders.length > 0; else noOrders" class="orders-list">
+    @for (order of orders; track order.id) {
+    <div class="order-card">
+      <div class="order-info">
+        <div class="order-id">Order #{{ order.id.substring(0, 8) }}</div>
+        <div class="order-date">{{ order.createdAt | date:'mediumDate' }}</div>
+      </div>
+      <div class="order-details">
+        <div class="order-status" [ngClass]="order.status?.toLowerCase()">
+          {{ order.status }}
+        </div>
+        <div class="order-total">
+          {{ order.totalAmount | currency }}
+        </div>
+      </div>
+      <div class="order-actions">
+        <!-- <a [routerLink]="['/orders', order.id]" class="btn btn-outline btn-sm">View Details</a> -->
+      </div>
+    </div>
+    }
+  </div>
+
+  <ng-template #noOrders>
+    <div class="no-orders" *ngIf="!errorMessage">
+      <p>You haven't placed any orders yet.</p>
+      <a routerLink="/products" class="btn btn-primary">Go to Store</a>
+    </div>
+  </ng-template>
+</div>
