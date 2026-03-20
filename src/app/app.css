@@ -40,12 +40,28 @@ body {
 }
 
 .logo a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
   font-size: 1.6rem;
   font-weight: 800;
-  color: var(--primary-color);
-  text-decoration: none;
+  color: #1a1a1a;
   letter-spacing: -0.5px;
-  display: block;
+}
+
+.logo-icon {
+  filter: drop-shadow(0 4px 6px rgba(0, 123, 255, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.logo a:hover .logo-icon {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+.logo span {
+  color: #1a1a1a;
+  font-weight: 800;
 }
 
 .main-nav ul {
