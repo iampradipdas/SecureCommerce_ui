@@ -21,7 +21,8 @@ export class ProductFormComponent implements OnInit {
     description: '',
     price: 0,
     stock: 0,
-    categoryId: ''
+    categoryId: '',
+    imageUrl: ''
   };
   errorMessage = '';
 
@@ -62,7 +63,8 @@ export class ProductFormComponent implements OnInit {
           description: data.description,
           price: data.price,
           stock: data.stock,
-          categoryId: data.categoryId
+          categoryId: data.categoryId,
+          imageUrl: data.imageUrl
         };
       },
       error: err => {
@@ -90,6 +92,21 @@ export class ProductFormComponent implements OnInit {
         },
         error: err => {
           this.errorMessage = err.error?.message || 'Error creating product.';
+        }
+      });
+    }
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.productService.uploadImage(file).subscribe({
+        next: (response) => {
+          this.product.imageUrl = response.imageUrl;
+          alert('Image uploaded successfully!');
+        },
+        error: (err) => {
+          alert('Error uploading image.');
         }
       });
     }

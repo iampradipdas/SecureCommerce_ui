@@ -1,0 +1,64 @@
+<div class="category-management-container">
+  <h2>Manage Categories</h2>
+
+  <div class="row">
+    <!-- Category Form -->
+    <div class="col-md-4">
+      <div class="card p-3 mb-4">
+        <h4>{{ editingCategory ? 'Edit' : 'Add New' }} Category</h4>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" [(ngModel)]="newCategory.name" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" [(ngModel)]="newCategory.description" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="!newCategory.name">
+              {{ editingCategory ? 'Update' : 'Create' }}
+            </button>
+            <button type="button" *ngIf="editingCategory" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+          </div>
+        </form>
+
+        <div *ngIf="message" class="alert mt-3" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+          {{ message }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Category List -->
+    <div class="col-md-8">
+      <div class="card p-3">
+        <h4>All Categories</h4>
+        <div *ngIf="loading" class="text-center p-3">Loading...</div>
+        <table class="table table-striped" *ngIf="!loading && categories.length > 0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cat of categories">
+              <td>{{ cat.name }}</td>
+              <td>{{ cat.description }}</td>
+              <td>
+                <div class="btn-group btn-group-sm">
+                  <button class="btn btn-outline-primary" (click)="editCategory(cat)">Edit</button>
+                  <button class="btn btn-outline-danger" (click)="deleteCategory(cat.id)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!loading && categories.length === 0" class="text-center p-3">
+          No categories found.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

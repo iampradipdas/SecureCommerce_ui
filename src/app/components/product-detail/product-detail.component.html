@@ -1,7 +1,8 @@
 <div class="product-detail-container" *ngIf="product">
   <div class="product-header">
     <div class="product-image-large">
-      <span class="no-image">No Image</span>
+      <img *ngIf="product.imageUrl" [src]="product.imageUrl" [alt]="product.name">
+      <span class="no-image" *ngIf="!product.imageUrl">No Image</span>
     </div>
     <div class="product-main-info">
       <span class="category-tag">{{ product.categoryName }}</span>

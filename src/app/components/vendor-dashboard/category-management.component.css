@@ -1,0 +1,22 @@
+.category-management-container {
+  padding: 20px;
+}
+
+.card {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: none;
+  border-radius: 12px;
+}
+
+h2, h4 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.table th {
+  background-color: #f8f9fa;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}

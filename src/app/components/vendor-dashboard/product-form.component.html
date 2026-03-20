@@ -62,6 +62,20 @@
           </div>
         </div>
 
+        <div class="form-group mb-3">
+          <label for="image">Product Image</label>
+          <input 
+            type="file" 
+            id="image" 
+            (change)="onFileSelected($event)" 
+            class="form-control" 
+            accept="image/*"
+          >
+          <div class="mt-2" *ngIf="product.imageUrl">
+            <img [src]="product.imageUrl" class="img-preview" alt="Preview">
+          </div>
+        </div>
+
         <div class="form-group mb-4">
           <label for="description">Description</label>
           <textarea 

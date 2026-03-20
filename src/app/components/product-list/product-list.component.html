@@ -37,8 +37,9 @@
   <div class="product-grid" *ngIf="products.length > 0">
     @for (product of products; track product.id) {
       <div class="product-card">
-      <div class="product-image-placeholder">
-        <span class="no-image">No Image</span>
+      <div class="product-image">
+        <img *ngIf="product.imageUrl" [src]="product.imageUrl" [alt]="product.name">
+        <span class="no-image" *ngIf="!product.imageUrl">No Image</span>
       </div>
       <div class="product-info">
         <span class="category-tag" *ngIf="product.categoryName">{{ product.categoryName }}</span>
