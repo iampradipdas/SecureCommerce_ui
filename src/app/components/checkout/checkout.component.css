@@ -40,6 +40,10 @@
   flex: 1;
 }
 
+.form-group.third {
+  flex: 1;
+}
+
 .form-row {
   display: flex;
   gap: 20px;

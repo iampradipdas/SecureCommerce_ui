@@ -22,4 +22,14 @@ export class OrderService {
   getOrderById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+
+  getVendorOrders(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/vendor`);
+  }
+
+  updateOrderStatus(id: string, status: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}/status`, `"${status}"`, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }

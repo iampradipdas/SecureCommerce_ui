@@ -50,7 +50,11 @@ export class CheckoutComponent implements OnInit {
 
     this.isProcessing = true;
     const checkoutData = {
-      ...this.shippingAddress,
+      shippingFullName: this.shippingAddress.fullName,
+      shippingAddress: this.shippingAddress.address,
+      shippingCity: this.shippingAddress.city,
+      shippingZipCode: this.shippingAddress.zipCode,
+      shippingCountry: this.shippingAddress.country,
       paymentMethod: 'Credit Card' // Simulated
     };
 

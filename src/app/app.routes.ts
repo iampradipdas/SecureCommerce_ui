@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { VendorDashboardComponent } from './components/vendor-dashboard/vendor-dashboard.component';
 import { CategoryManagementComponent } from './components/vendor-dashboard/category-management.component';
 import { ProductFormComponent } from './components/vendor-dashboard/product-form.component';
+import { VendorOrdersComponent } from './components/vendor-dashboard/vendor-orders.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
@@ -23,6 +24,7 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: VendorDashboardComponent },
       { path: 'categories', component: CategoryManagementComponent },
+      { path: 'orders', component: VendorOrdersComponent },
       { path: 'add-product', component: ProductFormComponent },
       { path: 'edit-product/:id', component: ProductFormComponent }
     ]

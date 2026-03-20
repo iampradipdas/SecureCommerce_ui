@@ -1,0 +1,55 @@
+<div class="vendor-orders-container">
+  <div class="header">
+    <h2>Manage Customer Orders</h2>
+    <p>Track and fulfill orders containing your products.</p>
+  </div>
+
+  <div *ngIf="isLoading" class="loader">Loading orders...</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && orders.length === 0" class="empty-state">
+    <p>No orders found for your products yet.</p>
+  </div>
+
+  <div class="orders-grid" *ngIf="!isLoading && orders.length > 0">
+    @for (order of orders; track order.id) {
+    <div class="order-card">
+      <div class="order-header">
+        <div class="order-info">
+          <span class="order-id">Order #{{ order.id.substring(0, 8) }}</span>
+          <span class="order-date">{{ order.createdAt | date:'medium' }}</span>
+        </div>
+        <div class="status-badge" [attr.data-status]="order.status">
+          {{ order.status }}
+        </div>
+      </div>
+
+      <div class="customer-info">
+        <strong>Customer:</strong> {{ order.shippingFullName }}<br>
+        <strong>Address:</strong> {{ order.shippingAddress }}, {{ order.shippingCity }}, {{ order.shippingCountry }}
+      </div>
+
+      <div class="order-items">
+        @for (item of order.items; track item.productId) {
+        <div class="item">
+          <span>{{ item.productName }} x {{ item.quantity }}</span>
+          <span>{{ (item.price * item.quantity) | currency }}</span>
+        </div>
+        }
+      </div>
+
+      <div class="order-footer">
+        <div class="total">Total: {{ order.totalAmount | currency }}</div>
+        <div class="actions">
+          <label>Update Status:</label>
+          <select [value]="order.status" (change)="updateStatus(order.id, $event)" class="status-select">
+            @for (status of statuses; track status) {
+            <option [value]="status">{{ status }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

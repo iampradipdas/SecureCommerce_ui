@@ -23,6 +23,7 @@
         <li *ngIf="isLoggedIn()"><a routerLink="/products" routerLinkActive="active">Products</a></li>
         <li *ngIf="isLoggedIn()"><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
         <li *ngIf="isVendor()"><a routerLink="/vendor/dashboard" routerLinkActive="active">Vendor Dashboard</a></li>
+        <li *ngIf="isVendor()"><a routerLink="/vendor/orders" routerLinkActive="active">Manage Orders</a></li>
         <li *ngIf="isVendor()"><a routerLink="/vendor/categories" routerLinkActive="active">Manage Categories</a></li>
       </ul>
     </nav>
