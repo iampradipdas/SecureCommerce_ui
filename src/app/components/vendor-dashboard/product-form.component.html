@@ -1,0 +1,87 @@
+<div class="product-form-container">
+  <div class="card">
+    <div class="card-header">
+      <h2>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h2>
+    </div>
+    <div class="card-body">
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+      <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+        <div class="form-group mb-3">
+          <label for="name">Product Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            class="form-control" 
+            [(ngModel)]="product.name" 
+            required 
+            #name="ngModel"
+            [class.is-invalid]="name.invalid && name.touched"
+          >
+          <div class="invalid-feedback">Name is required.</div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="category">Category</label>
+          <select 
+            id="category" 
+            name="categoryId" 
+            class="form-control" 
+            [(ngModel)]="product.categoryId" 
+            required
+          >
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 form-group mb-3">
+            <label for="price">Price ($)</label>
+            <input 
+              type="number" 
+              id="price" 
+              name="price" 
+              class="form-control" 
+              [(ngModel)]="product.price" 
+              required 
+              min="0"
+            >
+          </div>
+          <div class="col-md-6 form-group mb-3">
+            <label for="stock">Stock Quantity</label>
+            <input 
+              type="number" 
+              id="stock" 
+              name="stock" 
+              class="form-control" 
+              [(ngModel)]="product.stock" 
+              required 
+              min="0"
+            >
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="description">Description</label>
+          <textarea 
+            id="description" 
+            name="description" 
+            class="form-control" 
+            [(ngModel)]="product.description" 
+            rows="4"
+          ></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+            {{ isEditMode ? 'Update Product' : 'Create Product' }}
+          </button>
+          <button type="button" class="btn btn-outline-secondary ms-2" [routerLink]="['/vendor/dashboard']">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

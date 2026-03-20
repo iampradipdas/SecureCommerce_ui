@@ -8,6 +8,7 @@
         <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
         <li *ngIf="isLoggedIn()"><a routerLink="/products" routerLinkActive="active">Products</a></li>
         <li *ngIf="isLoggedIn()"><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
+        <li *ngIf="isVendor()"><a routerLink="/vendor/dashboard" routerLinkActive="active">Vendor Dashboard</a></li>
       </ul>
     </nav>
     <div class="auth-buttons">

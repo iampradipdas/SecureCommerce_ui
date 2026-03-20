@@ -2,6 +2,32 @@
   <div class="list-header">
     <h2>Our Products</h2>
     <p>Browse through our collection of premium items.</p>
+    <div class="search-bar">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (input)="onSearch()" 
+        placeholder="Search products..." 
+        class="form-control"
+      >
+    </div>
+  </div>
+
+  <div class="category-filter">
+    <button 
+      class="category-btn" 
+      [class.active]="!selectedCategoryId" 
+      (click)="onCategorySelect(null)">
+      All
+    </button>
+    @for (category of categories; track category.id) {
+      <button 
+        class="category-btn" 
+        [class.active]="selectedCategoryId === category.id" 
+        (click)="onCategorySelect(category.id)">
+        {{ category.name }}
+      </button>
+    }
   </div>
 
   <div *ngIf="errorMessage" class="alert alert-danger">
@@ -15,11 +41,15 @@
         <span class="no-image">No Image</span>
       </div>
       <div class="product-info">
+        <span class="category-tag" *ngIf="product.categoryName">{{ product.categoryName }}</span>
         <h3>{{ product.name }}</h3>
         <p class="description">{{ product.description }}</p>
         <div class="product-footer">
           <span class="price">{{ product.price | currency }}</span>
-          <button class="btn btn-primary btn-sm" (click)="addToCart(product)">Add to Cart</button>
+          <div class="action-buttons">
+            <a [routerLink]="['/product', product.id]" class="btn btn-outline-primary btn-sm me-2">Details</a>
+            <button class="btn btn-primary btn-sm" (click)="addToCart(product)">Add to Cart</button>
+          </div>
         </div>
       </div>
     </div>

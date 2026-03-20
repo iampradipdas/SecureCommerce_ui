@@ -14,6 +14,7 @@ import { AuthService } from './services/auth.service';
 export class App implements OnInit {
   title = signal('SecureCommerce');
   isLoggedIn = signal(false);
+  isVendor = signal(false);
   username = signal<string | null>(null);
 
   constructor(
@@ -38,6 +39,9 @@ export class App implements OnInit {
     if (loggedIn) {
       const user = this.storageService.getUser();
       this.username.set(user?.name || 'User');
+      this.isVendor.set(user?.roles?.includes('Vendor') || false);
+    } else {
+      this.isVendor.set(false);
     }
   }
 
