@@ -4,11 +4,21 @@
   --secondary-color: #6c757d;
   --success-color: #28a745;
   --danger-color: #dc3545;
-  --bg-color: #f4f7f6;
-  --text-color: #333;
-  --header-bg: #fff;
-  --footer-bg: #333;
-  --footer-text: #fff;
+  --bg-color: #f8fafc;
+  --text-color: #1e293b;
+  --header-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --input-bg: #fff;
+}
+
+[data-theme='dark'] {
+  --bg-color: #0f172a;
+  --text-color: #f1f5f9;
+  --header-bg: rgba(15, 23, 42, 0.8);
+  --card-bg: #1e293b;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --input-bg: #334155;
 }
 
 body {
@@ -16,10 +26,11 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .app-header {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--header-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
@@ -27,7 +38,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-container {
@@ -91,6 +102,27 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .user-welcome {

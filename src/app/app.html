@@ -27,10 +27,16 @@
       </ul>
     </nav>
     <div class="auth-buttons">
+      <button (click)="themeService.toggleTheme()" class="theme-toggle" [title]="themeService.isDark() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+        <span *ngIf="!themeService.isDark()">🌙</span>
+        <span *ngIf="themeService.isDark()">☀️</span>
+      </button>
+      
       <ng-container *ngIf="!isLoggedIn()">
         <a routerLink="/login" class="btn btn-secondary">Login</a>
         <a routerLink="/register" class="btn btn-primary">Register</a>
       </ng-container>
+      
       <ng-container *ngIf="isLoggedIn()">
         <span class="user-welcome">Welcome, {{ username() }}</span>
         <button (click)="logout()" class="btn btn-outline">Logout</button>

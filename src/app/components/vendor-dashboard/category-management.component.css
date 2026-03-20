@@ -3,8 +3,9 @@
 }
 
 .card {
+  background-color: var(--card-bg);
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  border: none;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
 }
 

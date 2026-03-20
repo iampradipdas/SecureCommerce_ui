@@ -1,54 +1,41 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
+import { StorageService } from './services/storage.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterModule, CommonModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
-export class App implements OnInit {
-  title = signal('SecureCommerce');
-  isLoggedIn = signal(false);
-  isVendor = signal(false);
-  username = signal<string | null>(null);
-
+export class App {
   constructor(
-    private storageService: StorageService,
     private authService: AuthService,
-    private router: Router
+    private storageService: StorageService,
+    private router: Router,
+    public themeService: ThemeService
   ) {}
 
-  ngOnInit(): void {
-    this.authService.authStatus$.subscribe(() => {
-      this.updateAuthState();
-    });
-
-    // Initial check
-    const loggedIn = this.storageService.isLoggedIn();
-    this.authService.updateAuthStatus(loggedIn);
+  isLoggedIn() {
+    return this.storageService.isLoggedIn();
   }
 
-  updateAuthState(): void {
-    const loggedIn = this.storageService.isLoggedIn();
-    this.isLoggedIn.set(loggedIn);
-    if (loggedIn) {
-      const user = this.storageService.getUser();
-      this.username.set(user?.name || 'User');
-      this.isVendor.set(user?.roles?.includes('Vendor') || false);
-    } else {
-      this.isVendor.set(false);
-    }
-  }
-
-  logout(): void {
+  logout() {
     this.storageService.clean();
     this.authService.updateAuthStatus(false);
-    this.username.set(null);
     this.router.navigate(['/login']);
+  }
+
+  username() {
+    return this.storageService.getUser()?.name || '';
+  }
+
+  isVendor() {
+    const user = this.storageService.getUser();
+    return user?.roles?.includes('Vendor') || false;
   }
 }
