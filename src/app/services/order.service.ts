@@ -11,8 +11,8 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  checkout(): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/checkout`, {});
+  checkout(checkoutData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/checkout`, checkoutData);
   }
 
   getOrders(): Observable<any[]> {

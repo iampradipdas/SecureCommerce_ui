@@ -43,8 +43,18 @@ export class CheckoutComponent implements OnInit {
   }
 
   onCheckout(): void {
+    if (!this.shippingAddress.fullName || !this.shippingAddress.address) {
+      this.errorMessage = 'Please provide complete shipping information.';
+      return;
+    }
+
     this.isProcessing = true;
-    this.orderService.checkout().subscribe({
+    const checkoutData = {
+      ...this.shippingAddress,
+      paymentMethod: 'Credit Card' // Simulated
+    };
+
+    this.orderService.checkout(checkoutData).subscribe({
       next: (order) => {
         this.isProcessing = false;
         alert('Order placed successfully!');
@@ -52,7 +62,7 @@ export class CheckoutComponent implements OnInit {
       },
       error: err => {
         this.isProcessing = false;
-        this.errorMessage = err.error.message || 'Checkout failed. Please try again.';
+        this.errorMessage = err.error?.message || 'Checkout failed. Please try again.';
       }
     });
   }
