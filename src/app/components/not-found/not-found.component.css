@@ -1,0 +1,45 @@
+.not-found-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.content {
+  max-width: 500px;
+}
+
+.brand-logo {
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+h1 {
+  font-size: 6rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary-color), #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 1rem 0;
+  color: var(--text-color);
+}
+
+p {
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.btn-large {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+}

@@ -11,6 +11,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { VendorGuard } from './interceptors/vendor.guard';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,5 +32,6 @@ export const routes: Routes = [
   { path: 'orders', component: OrderListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent }
 ];
